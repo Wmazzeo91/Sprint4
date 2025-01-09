@@ -34,22 +34,24 @@ if 'df_experiment_results' not in st.session_state:
 
 st.header('Tossing a Coin')
 
-chart = st.line_chart([0.5])
+# Initialize with DataFrame
+chart_data = pd.DataFrame([0.5], columns=["Probability"])
+chart = st.line_chart(chart_data)
 
 def toss_coin(n):
-
     trial_outcomes = scipy.stats.bernoulli.rvs(p=0.5, size=n)
-
-    mean = None
     outcome_no = 0
     outcome_1_count = 0
 
     for r in trial_outcomes:
-        outcome_no +=1
+        outcome_no += 1
         if r == 1:
             outcome_1_count += 1
         mean = outcome_1_count / outcome_no
-        chart.add_rows([mean])
+
+        # Ensure data is a DataFrame
+        new_data = pd.DataFrame([mean], columns=["Probability"])
+        chart.add_rows(new_data)
         time.sleep(0.05)
 
     return mean
