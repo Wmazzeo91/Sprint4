@@ -2,6 +2,7 @@ import pandas as pd
 import scipy.stats
 import streamlit as st
 import time
+import numpy as np
 
 # these are stateful variables which are preserved as Streamlit reruns this script
 if 'experiment_no' not in st.session_state:
@@ -12,7 +13,7 @@ if 'df_experiment_results' not in st.session_state:
 
 st.header('Tossing a Coin')
 
-chart = st.line_chart([0.5])
+chart = st.line_chart(np.array([0.5]))
 
 def toss_coin(n):
 
